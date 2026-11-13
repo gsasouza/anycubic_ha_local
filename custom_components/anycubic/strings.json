@@ -27,7 +27,8 @@
   "options": {
     "step": {
       "init": {
-        "data": { "camera_source": "Camera source" }
+        "data": { "camera_source": "Camera source", "auto_leveling": "Auto-level before each print" },
+        "data_description": { "auto_leveling": "Asks the printer to level the bed when a print sent from Home Assistant starts. Off upstream because one start with it on hung waiting on the bed preheat: watch the first one." }
       }
     }
   },

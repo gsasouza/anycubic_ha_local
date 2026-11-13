@@ -1,7 +1,7 @@
 {
   "domain": "anycubic",
   "name": "Anycubic 3D Printer - Local Control - NO Cloud",
-  "codeowners": ["@chrisfore"],
+  "codeowners": ["@chrisfore", "@gsasouza"],
   "config_flow": true,
   "dependencies": ["ffmpeg", "file_upload"],
   "documentation": "https://github.com/chrisfore/anycubic_ha_local",
@@ -9,5 +9,5 @@
   "issue_tracker": "https://github.com/chrisfore/anycubic_ha_local/issues",
   "loggers": ["custom_components.anycubic"],
   "requirements": ["paho-mqtt>=1.6"],
-  "version": "1.3.0"
+  "version": "1.3.0-gs.1"
 }

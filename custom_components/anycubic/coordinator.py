@@ -57,6 +57,7 @@ from .anycubic_local.models import (
     parse_multicolorbox,
 )
 from .const import (
+    CONF_AUTO_LEVELING,
     ACE_DRYING_DEFAULT_DURATION_MIN,
     ACE_DRYING_DEFAULT_TEMP,
     ACE_MODEL_NAMES,
@@ -957,7 +958,8 @@ class AnycubicCoordinator(DataUpdateCoordinator[AnycubicData]):
         taskid = str(100_000_000 + secrets.randbelow(900_000_000))
         topic, payload = build_print_start(
             self.hs.model_id, self.hs.device_id, taskid=taskid, filename=name,
-            filesize=size, md5=md5, filetype=filetype, ams_settings=ams_settings)
+            filesize=size, md5=md5, filetype=filetype, ams_settings=ams_settings,
+            auto_leveling=bool(self.config_entry.options.get(CONF_AUTO_LEVELING, False)))
         answer = await self._async_send_start(topic, payload)
         if answer is not None:
             code = answer["code"]

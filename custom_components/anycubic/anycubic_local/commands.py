@@ -75,7 +75,8 @@ FILETYPE_GCODE = 1
 
 def build_print_start(model_id: str, device_id: str, *, taskid: str, filename: str,
                       filesize: int, md5: str, ams_settings: dict,
-                      filetype: int = FILETYPE_GCODE, ts=None, msgid=None):
+                      filetype: int = FILETYPE_GCODE, auto_leveling: bool = False,
+                      ts=None, msgid=None):
     """Return (topic, payload) for print/start: print a file that is already on the printer.
 
     UNVERIFIED SHAPE (T3). It follows the start this printer has been sent by other clients:
@@ -94,8 +95,9 @@ def build_print_start(model_id: str, device_id: str, *, taskid: str, filename: s
         "md5": md5,
         "ams_settings": ams_settings,
         "task_settings": {
-            # Off: a start with leveling on hung on the printer, waiting on a 10 C bed preheat.
-            "auto_leveling": 0,
+            # Off by default: a start with leveling on hung on the printer, waiting on a 10 C
+            # bed preheat. The "Auto-leveling" option turns it on.
+            "auto_leveling": 1 if auto_leveling else 0,
             "vibration_compensation": 0,
             "flow_calibration": 0,
             "timelapse": {"status": 0},

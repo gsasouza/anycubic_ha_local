@@ -9,6 +9,7 @@ from homeassistant.config_entries import ConfigEntry, ConfigFlow, ConfigFlowResu
 from homeassistant.const import CONF_HOST
 from homeassistant.core import callback
 from homeassistant.helpers.selector import (
+    BooleanSelector,
     EntitySelector,
     EntitySelectorConfig,
     SelectSelector,
@@ -27,6 +28,7 @@ from .anycubic_local.handshake import HandshakeResult, do_handshake
 from .const import (
     CAMERA_SOURCE_PRINTER,
     CAMERA_SOURCE_RINKHALS,
+    CONF_AUTO_LEVELING,
     CONF_CAMERA_SOURCE,
     CONF_DOOR_SENSOR,
     DOMAIN,
@@ -220,6 +222,9 @@ class AnycubicOptionsFlow(_OptionsFlowBase):
                 SelectSelectorConfig(
                     options=[CAMERA_SOURCE_PRINTER, CAMERA_SOURCE_RINKHALS],
                     translation_key=CONF_CAMERA_SOURCE)),
+            # Level the bed at the start of a print sent from Home Assistant.
+            vol.Required(CONF_AUTO_LEVELING,
+                         default=bool(entry.options.get(CONF_AUTO_LEVELING, False))): BooleanSelector(),
         }
         if door_field:
             # The door sensor push-off will read (a later phase). Any binary sensor that

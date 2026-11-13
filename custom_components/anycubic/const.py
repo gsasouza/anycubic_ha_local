@@ -17,6 +17,11 @@ DEFAULT_QUERY_INTERVAL = 30  # seconds; heartbeat poll
 CONF_CAMERA_SOURCE = "camera_source"
 CAMERA_SOURCE_PRINTER = "printer"
 CAMERA_SOURCE_RINKHALS = "rinkhals"
+
+# The "Auto-leveling" option: whether a start from Home Assistant asks the printer to level
+# the bed first (task_settings.auto_leveling). Off by default, as upstream sends it: a start
+# with leveling on was once seen to hang waiting on a 10 C bed preheat.
+CONF_AUTO_LEVELING = "auto_leveling"
 MANUFACTURER = "Anycubic"
 
 # Printing from Home Assistant (the print_file and print_again actions, "Print again", "Bed
